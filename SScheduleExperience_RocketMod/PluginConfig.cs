@@ -23,12 +23,12 @@ namespace SScheduleExperience_RocketMod
 
         public void LoadDefaults()
         {
-            expList = new List<string> { "10:test_perm:100:player 获得经验 exp" };
+            expList = new List<string> { "10:default:100:默认组 player 获得经验 exp", "15:vip:200:vip组 player 获得经验 exp" };
         
             mysql_ip = "127.0.0.1";
             mysql_port = "3306";
             mysql_username = "bsl";
-            mysql_password = "123";
+            mysql_password = "1234";
             mysql_database = "bsl";
             mysql_table = "playerexperiences";
         }

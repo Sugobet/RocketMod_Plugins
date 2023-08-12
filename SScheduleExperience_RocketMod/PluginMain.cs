@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using Rocket.API;
 using Rocket.API.Serialisation;
+using Rocket.Core;
 using Rocket.Core.Logging;
 using Rocket.Core.Plugins;
 using Rocket.Unturned.Chat;
@@ -89,19 +90,20 @@ namespace SScheduleExperience_RocketMod
             {
                 string[] cmd = val.Split(':');
 
-                if (cmd[0] != time.ToString()) { return; }
+                if (cmd[0] != time.ToString()) { continue; }
 
-                string permissionName = cmd[1];
+                string permissionGroupName = cmd[1];
 
                 foreach (SteamPlayer client in Provider.clients)
                 {
                     if (client == null) continue;
 
                     UnturnedPlayer player = UnturnedPlayer.FromPlayer(client.player);
-                    List<Permission> playerPermission = player.GetPermissions();
-                    foreach (Permission permission in playerPermission)
+                    // List<Permission> playerPermission = player.GetPermissions();
+                    List<RocketPermissionsGroup> playerPermissionGroups =  R.Permissions.GetGroups(player, true);
+                    foreach (RocketPermissionsGroup permissionGroup in playerPermissionGroups)
                     {
-                        if (permission.Name == permissionName)
+                        if (permissionGroup.Id == permissionGroupName)
                         {
                             uint exp = uint.Parse(cmd[2]);
                             uint newExp = player.Player.skills.experience + exp;

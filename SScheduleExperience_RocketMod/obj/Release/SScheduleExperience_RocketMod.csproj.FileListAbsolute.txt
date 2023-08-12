@@ -88,3 +88,10 @@ C:\Users\sugob\Desktop\SScheduleExperience_RocketMod\obj\Release\SScheduleExperi
 C:\Users\sugob\Desktop\SScheduleExperience_RocketMod\obj\Release\SScheduleExperience_RocketMod.csproj.CopyComplete
 C:\Users\sugob\Desktop\SScheduleExperience_RocketMod\obj\Release\SScheduleExperience_RocketMod.dll
 C:\Users\sugob\Desktop\SScheduleExperience_RocketMod\obj\Release\SScheduleExperience_RocketMod.pdb
+C:\Users\sugob\Desktop\RocketMod_Plugins\SScheduleExperience_RocketMod\bin\Release\SScheduleExperience_RocketMod.dll
+C:\Users\sugob\Desktop\RocketMod_Plugins\SScheduleExperience_RocketMod\bin\Release\SScheduleExperience_RocketMod.pdb
+C:\Users\sugob\Desktop\RocketMod_Plugins\SScheduleExperience_RocketMod\obj\Release\SScheduleExperience_RocketMod.csproj.AssemblyReference.cache
+C:\Users\sugob\Desktop\RocketMod_Plugins\SScheduleExperience_RocketMod\obj\Release\SScheduleExperience_RocketMod.csproj.CoreCompileInputs.cache
+C:\Users\sugob\Desktop\RocketMod_Plugins\SScheduleExperience_RocketMod\obj\Release\SScheduleExperience_RocketMod.csproj.CopyComplete
+C:\Users\sugob\Desktop\RocketMod_Plugins\SScheduleExperience_RocketMod\obj\Release\SScheduleExperience_RocketMod.dll
+C:\Users\sugob\Desktop\RocketMod_Plugins\SScheduleExperience_RocketMod\obj\Release\SScheduleExperience_RocketMod.pdb
