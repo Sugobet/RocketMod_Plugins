@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SNoLoot_RocketMod", "SNoLoot_RocketMod.csproj", "{41950EAE-0A1D-4433-94E5-E4DCC297E248}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{41950EAE-0A1D-4433-94E5-E4DCC297E248}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41950EAE-0A1D-4433-94E5-E4DCC297E248}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41950EAE-0A1D-4433-94E5-E4DCC297E248}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41950EAE-0A1D-4433-94E5-E4DCC297E248}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2FDF0A3E-6426-4792-BCB5-D05A8626DB24}
+	EndGlobalSection
+EndGlobal
