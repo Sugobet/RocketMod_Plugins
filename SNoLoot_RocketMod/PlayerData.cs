@@ -28,17 +28,17 @@ namespace SNoLoot_RocketMod
 
         public ItemJar[] pantsItemJar;
 
-        public UnturnedPlayer Player { get; set; }
-
         public byte HandWidth { get; set; }
         public byte HandHeight { get; set; }
 
-        public PlayerData(UnturnedPlayer unturnedPlayer) 
+        public bool IsDead { get; set; }
+
+        public PlayerData(UnturnedPlayer unturnedPlayer, bool isDead) 
         {
+            IsDead = isDead;
+
             HandWidth = unturnedPlayer.Inventory.items[PlayerInventory.SLOTS].width;
             HandHeight = unturnedPlayer.Inventory.items[PlayerInventory.SLOTS].height;
-
-            Player = unturnedPlayer;
 
             handsItemJars = unturnedPlayer.Inventory.items[PlayerInventory.SLOTS].items.ToArray();
 

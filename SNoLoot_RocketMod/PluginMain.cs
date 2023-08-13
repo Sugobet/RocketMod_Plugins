@@ -17,6 +17,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using static Rocket.Unturned.Events.UnturnedEvents;
 using static Rocket.Unturned.Events.UnturnedPlayerEvents;
 using Logger = Rocket.Core.Logging.Logger;
 
@@ -29,20 +30,51 @@ namespace SNoLoot_RocketMod
 
         protected override void Load()
         {
+
             UnturnedPlayers = new Dictionary<string, PlayerData>();
 
             UnturnedPlayerEvents.OnPlayerDeath += OnPlayerDeath;
-            // UnturnedPlayerEvents.OnPlayerDead += OnPlayerDead;
-            // UnturnedPlayerEvents.OnPlayerInventoryResized += OnPlayerInventoryResized;
             PlayerLife.OnRevived_Global += OnRevived_Global;
-            Logger.Log("SNoLoot v1.0.3 loaded    Author: Sugobet");
+            U.Events.OnPlayerConnected += OnPlayerConnected;
+
+            Logger.Log("SNoLoot v1.0.5 loaded    Author: Sugobet");
+        }
+
+        private void OnPlayerConnected(UnturnedPlayer player)
+        {
+            if (!UnturnedPlayers.ContainsKey(player.CSteamID.ToString())) { return; }
+
+            Items handsItems = player.Inventory.items[PlayerInventory.SLOTS];
+            byte hcount = handsItems.getItemCount();
+
+            if (hcount > 0) { return; }
+
+            PlayerData d_player = UnturnedPlayers[player.CSteamID.ToString()];
+
+            if (!d_player.IsDead) { return; }
+
+            player.Inventory.items[PlayerInventory.SLOTS].resize(d_player.HandWidth, d_player.HandHeight);
+            foreach (var itemJar in d_player.handsItemJars)
+            {
+                player.Inventory.items[PlayerInventory.SLOTS].addItem(itemJar.x, itemJar.y, itemJar.rot, itemJar.item);
+            }
+
+
+            // 恢复shirt
+            player.Player.clothing.askWearShirt(d_player.shirtAsset, d_player.shirtQuality, d_player.shirtState, false);
+
+            // 恢复pants
+            player.Player.clothing.askWearPants(d_player.pantsAsset, d_player.pantsQuality, d_player.pantsState, false);
         }
 
         private void OnRevived_Global(PlayerLife life)
         {
+
             UnturnedPlayer player = UnturnedPlayer.FromPlayer(life.player);
 
             PlayerData d_player = UnturnedPlayers[player.CSteamID.ToString()];
+            UnturnedPlayers[player.CSteamID.ToString()].IsDead = false;
+
             player.Inventory.items[PlayerInventory.SLOTS].resize(d_player.HandWidth, d_player.HandHeight);
             foreach (var itemJar in d_player.handsItemJars)
             {
@@ -60,9 +92,8 @@ namespace SNoLoot_RocketMod
         protected override void Unload()
         {
             UnturnedPlayerEvents.OnPlayerDeath -= OnPlayerDeath;
-            // UnturnedPlayerEvents.OnPlayerDead -= OnPlayerDead;
             PlayerLife.OnRevived_Global -= OnRevived_Global;
-            // UnturnedPlayerEvents.OnPlayerInventoryResized -= OnPlayerInventoryResized;
+            U.Events.OnPlayerConnected -= OnPlayerConnected;
         }
 
 
@@ -124,8 +155,7 @@ namespace SNoLoot_RocketMod
         // 死亡前
         private void OnPlayerDeath(UnturnedPlayer player, EDeathCause cause, ELimb limb, CSteamID murderer)
         {
-            UnturnedPlayers[player.CSteamID.ToString()] = new PlayerData(player);
-
+            UnturnedPlayers[player.CSteamID.ToString()] = new PlayerData(player, true);
 /*            Items shirtItems = player.Inventory.items[PlayerInventory.SHIRT];
             byte scount = shirtItems.getItemCount();
             for (byte index = 0; index < scount; index++)
