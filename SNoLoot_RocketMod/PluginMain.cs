@@ -37,7 +37,7 @@ namespace SNoLoot_RocketMod
             PlayerLife.OnRevived_Global += OnRevived_Global;
             U.Events.OnPlayerConnected += OnPlayerConnected;
 
-            Logger.Log("SNoLoot v1.0.5 loaded    Author: Sugobet");
+            Logger.Log("SNoLoot v1.0.6 loaded    Author: Sugobet");
         }
 
         private void OnPlayerConnected(UnturnedPlayer player)
@@ -52,6 +52,7 @@ namespace SNoLoot_RocketMod
             PlayerData d_player = UnturnedPlayers[player.CSteamID.ToString()];
 
             if (!d_player.IsDead) { return; }
+            UnturnedPlayers[player.CSteamID.ToString()].IsDead = false;
 
             player.Inventory.items[PlayerInventory.SLOTS].resize(d_player.HandWidth, d_player.HandHeight);
             foreach (var itemJar in d_player.handsItemJars)
