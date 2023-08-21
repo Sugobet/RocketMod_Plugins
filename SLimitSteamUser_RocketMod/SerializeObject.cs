@@ -77,11 +77,5 @@ namespace SLimitSteamUser_RocketMod
         public string avatarfull { get; set; }
         public string avatarhash { get; set; }
         public int personastate { get; set; }
-        public string realname { get; set; }
-        public string primaryclanid { get; set; }
-        public int timecreated { get; set; }
-        public int personastateflags { get; set; }
-        public string gameextrainfo { get; set; }
-        public string gameid { get; set; }
     }
 }
