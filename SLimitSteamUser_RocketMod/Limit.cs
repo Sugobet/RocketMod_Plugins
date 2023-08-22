@@ -87,6 +87,15 @@ namespace SLimitSteamUser_RocketMod
                 return false;
             }
 
+            if (!jsonString.Contains("total_count"))
+            {
+                if (PluginMain.Config.是否禁止游戏时长为私密进服)
+                {
+                    return true;
+                }
+                else { return false; }
+            }
+
             TimeRootObject jsonData = JsonConvert.DeserializeObject<TimeRootObject>(jsonString);
             var res = jsonData.response;
 

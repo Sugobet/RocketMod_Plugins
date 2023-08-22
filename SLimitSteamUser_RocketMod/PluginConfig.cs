@@ -14,6 +14,7 @@ namespace SLimitSteamUser_RocketMod
         public int Steam等级限制进服 { get; set; }
         public int Unturned游戏时长限制 { get; set; }
         public bool 是否禁止私密账号进服 { get; set; }
+        public bool 是否禁止游戏时长为私密进服 { get; set; }
 
         public void LoadDefaults()
         {
@@ -22,6 +23,7 @@ namespace SLimitSteamUser_RocketMod
             Steam等级限制进服 = -1;
             Unturned游戏时长限制 = -1;
             是否禁止私密账号进服 = false;
+            是否禁止游戏时长为私密进服 = false;
         }
     }
 }
