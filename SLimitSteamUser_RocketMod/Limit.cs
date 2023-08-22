@@ -133,7 +133,11 @@ namespace SLimitSteamUser_RocketMod
 
             foreach (var player in players)
             {
-                if (player.personastate == 0)
+                if (player.personastate == 0 && jsonString.Contains("realname"))
+                {
+                    return false;
+                }
+                else if (player.personastate == 0 && !jsonString.Contains("realname"))
                 {
                     return true;
                 }
