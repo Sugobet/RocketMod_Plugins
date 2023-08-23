@@ -28,6 +28,8 @@ namespace SLog_RocketMod
 
             // 攻击者
             SteamPlayer insPlayer = PlayerTool.getSteamPlayer(instigatorSteamID);
+            if (insPlayer == null) { return; }
+
             string insName = insPlayer.playerID.characterName;
             Vector3 insPos = insPlayer.player.transform.position;
 
@@ -56,6 +58,8 @@ namespace SLog_RocketMod
 
             // 攻击者
             SteamPlayer insPlayer = PlayerTool.getSteamPlayer(instigatorSteamID);
+            if (insPlayer == null) { return; }
+
             string insName = insPlayer.playerID.characterName;
             Vector3 insPos = insPlayer.player.transform.position;
 
@@ -131,6 +135,8 @@ namespace SLog_RocketMod
 
             // 攻击者
             Player insPlayer = PlayerTool.getPlayer(instigatorSteamID);
+            if (insPlayer == null) { return; }
+
             string insName = insPlayer.channel.owner.playerID.characterName;
             Vector3 insPos = insPlayer.transform.position;
 
