@@ -1,4 +1,5 @@
 ﻿using Rocket.API;
+using Rocket.Unturned.Player;
 using SDG.Unturned;
 using System;
 using System.Collections.Generic;
@@ -72,6 +73,8 @@ namespace SLimitAskClothing_RocketMod
         public byte[] maskState;
         public byte[] glassesState;
 
+        public bool issing;
+
 
         public MyClothing()
         {
@@ -80,6 +83,8 @@ namespace SLimitAskClothing_RocketMod
 
         public MyClothing(PlayerClothing clothing)
         {
+            main = "";
+
             hatID = clothing.hat;
             shirtID = clothing.shirt;
             pantID = clothing.pants;
@@ -104,6 +109,51 @@ namespace SLimitAskClothing_RocketMod
             glassesState = clothing.glassesState;
             backpackState = clothing.backpackState;
 
+            PluginConfig config = PluginMain.Config;
+            foreach (MyClothing myClothing in config.套装)
+            {
+                if ((maskID == myClothing.maskID) && (myClothing.main == "mask"))
+                {
+                    main = myClothing.main;
+                    break;
+                }
+
+                if ((hatID == myClothing.hatID) && (myClothing.main == "hat"))
+                {
+                    main = myClothing.main;
+                    break;
+                }
+
+                if ((shirtID == myClothing.shirtID) && (myClothing.main == "shirt"))
+                {
+                    main = myClothing.main;
+                    break;
+                }
+
+                if ((pantID == myClothing.pantID) && (myClothing.main == "pant"))
+                {
+                    main = myClothing.main;
+                    break;
+                }
+
+                if ((vestID == myClothing.vestID) && (myClothing.main == "vest"))
+                {
+                    main = myClothing.main;
+                    break;
+                }
+
+                if ((glassesID == myClothing.glassesID) && (myClothing.main == "glasses"))
+                {
+                    main = myClothing.main;
+                    break;
+                }
+
+                if ((backpackID == myClothing.backpackID) && (myClothing.main == "backpack"))
+                {
+                    main = myClothing.main;
+                    break;
+                }
+            }
         }
     }
 }

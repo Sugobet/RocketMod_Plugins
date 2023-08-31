@@ -25,12 +25,15 @@ namespace SLimitAskClothing_RocketMod
     {
         private Dictionary<string, MyClothing> PlayerTZ;
 
+        public static  PluginConfig Config { get; private set; }
+
 
         protected override void Load()
         {
+            Config = Configuration.Instance;
             PlayerTZ = new Dictionary<string, MyClothing>();
 
-            PlayerClothing.OnShirtChanged_Global += OnShirtChanged_Global;
+            UnturnedPlayerEvents.OnPlayerWear += OnPlayerWear;
 
             U.Events.OnPlayerConnected += OnPlayerConnected;
             UnturnedPlayerEvents.OnPlayerDeath += OnPlayerDeath;
@@ -41,11 +44,453 @@ namespace SLimitAskClothing_RocketMod
 
         protected override void Unload()
         {
-            PlayerClothing.OnShirtChanged_Global -= OnShirtChanged_Global;
+            UnturnedPlayerEvents.OnPlayerWear -= OnPlayerWear;
 
             U.Events.OnPlayerConnected -= OnPlayerConnected;
             UnturnedPlayerEvents.OnPlayerDeath -= OnPlayerDeath;
             UnturnedPlayerEvents.OnPlayerDead -= OnPlayerDead;
+        }
+
+        private void OnPlayerWear(UnturnedPlayer player, Wearables wear, ushort id, byte? quality)
+        {
+            if (PlayerTZ[player.CSteamID.ToString()].issing)
+            {
+                return;
+            }
+            PlayerTZ[player.CSteamID.ToString()].issing = true;
+
+            PluginConfig config = Configuration.Instance;
+            PlayerClothing clothing = player.Player.clothing;
+
+
+            // 脱衣服， 判断脱之前是否穿的是套装
+            if (id == 0)
+            {
+                foreach (MyClothing myClothing in config.套装)
+                {
+
+                    if ((PlayerTZ[player.CSteamID.ToString()].shirtID == myClothing.shirtID) && (myClothing.main == "shirt"))
+                    {
+                        if (myClothing.hatID != 0)
+                        {
+                            clothing.thirdClothes.hat = 0;
+                            clothing.askWearHat(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.pantID != 0)
+                        {
+                            clothing.thirdClothes.pants = 0;
+                            clothing.askWearPants(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.maskID != 0)
+                        {
+                            clothing.thirdClothes.mask = 0;
+                            clothing.askWearMask(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.vestID != 0)
+                        {
+                            clothing.thirdClothes.vest = 0;
+                            clothing.askWearVest(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.backpackID != 0)
+                        {
+                            clothing.thirdClothes.backpack = 0;
+                            clothing.askWearBackpack(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.glassesID != 0)
+                        {
+                            clothing.thirdClothes.glasses = 0;
+                            clothing.askWearGlasses(0, 0, new byte[0], false);
+                        }
+
+                        // 将上衣脱下
+                        // 待修复
+                        clothing.askWearShirt(0, 0, new byte[0], false);
+
+                        PlayerTZ[player.CSteamID.ToString()] = new MyClothing(clothing.player.clothing);
+                        PlayerTZ[player.CSteamID.ToString()].issing = false;
+                        return;
+                    }
+                }
+            }
+
+
+            // 穿衣服
+            MyClothing myClothing1 = new MyClothing(clothing);
+            foreach (MyClothing myClothing in config.套装)
+            {
+                // 新穿的衣服不属于套装，且穿之前的衣服是套装 则换回
+                if ((myClothing1.main == "") && (PlayerTZ[player.CSteamID.ToString()].main != ""))
+                {
+                    // 换回后从背包删除物品
+                    MyClothing pTZ = PlayerTZ[player.CSteamID.ToString()];
+                    InventorySearch inventorySearch = null;
+                    if (wear.ToString() == "Hat")
+                    {
+                        clothing.askWearHat(pTZ.hatID, pTZ.hatQuality, pTZ.hatState, false);
+                        inventorySearch = player.Inventory.has(pTZ.hatID);
+                    }
+                    if (wear.ToString() == "Mask")
+                    {
+                        clothing.askWearMask(pTZ.maskID, pTZ.maskQuality, pTZ.maskState, false);
+                        inventorySearch = player.Inventory.has(pTZ.maskID);
+                    }
+                    if (wear.ToString() == "Vest")
+                    {
+                        clothing.askWearVest(pTZ.vestID, pTZ.vestQuality, pTZ.vestState, false);
+                        inventorySearch = player.Inventory.has(pTZ.vestID);
+                    }
+                    if (wear.ToString() == "Pants")
+                    {
+                        clothing.askWearPants(pTZ.pantID, pTZ.pantsQuality, pTZ.pantsState, false);
+                        inventorySearch = player.Inventory.has(pTZ.pantID);
+                    }
+                    if (wear.ToString() == "Shirt")
+                    {
+                        clothing.askWearShirt(pTZ.shirtID, pTZ.shirtQuality, pTZ.shirtState, false);
+                        inventorySearch = player.Inventory.has(pTZ.shirtID);
+                    }
+                    if (wear.ToString() == "Glasses")
+                    {
+                        clothing.askWearGlasses(pTZ.glassesID, pTZ.glassesQuality, pTZ.glassesState, false);
+                        inventorySearch = player.Inventory.has(pTZ.glassesID);
+                    }
+                    if (wear.ToString() == "Backpack")
+                    {
+                        clothing.askWearBackpack(pTZ.backpackID, pTZ.backpackQuality, pTZ.backpackState, false);
+                        inventorySearch = player.Inventory.has(pTZ.backpackID);
+                    }
+
+                    // player.Inventory.forceAddItem();
+                    // 待修复
+                    // player.Inventory.ReceiveItemRemove(inventorySearch.page, inventorySearch.jar.x, inventorySearch.jar.y);
+                    
+                    PlayerTZ[player.CSteamID.ToString()] = new MyClothing(player.Player.clothing.player.clothing);
+                    PlayerTZ[player.CSteamID.ToString()].issing = false;
+                    return;
+                }
+
+
+                // 穿之前的衣服是套装，则处理 只剩套装核心
+                if (PlayerTZ[player.CSteamID.ToString()].main != "")
+                {
+                    if ((PlayerTZ[player.CSteamID.ToString()].maskID == myClothing.maskID) && (myClothing.main == "mask"))
+                    {
+                        if (myClothing.hatID != 0)
+                        {
+                            clothing.thirdClothes.hat = 0;
+                            clothing.askWearHat(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.pantID != 0)
+                        {
+                            clothing.thirdClothes.pants = 0;
+                            clothing.askWearPants(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.shirtID != 0)
+                        {
+                            clothing.thirdClothes.shirt = 0;
+                            clothing.askWearShirt(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.vestID != 0)
+                        {
+                            clothing.thirdClothes.vest = 0;
+                            clothing.askWearVest(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.backpackID != 0)
+                        {
+                            clothing.thirdClothes.backpack = 0;
+                            clothing.askWearBackpack(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.glassesID != 0)
+                        {
+                            clothing.thirdClothes.glasses = 0;
+                            clothing.askWearGlasses(0, 0, new byte[0], false);
+                        }
+                    }
+
+                    if ((PlayerTZ[player.CSteamID.ToString()].hatID == myClothing.hatID) && (myClothing.main == "hat"))
+                    {
+                        if (myClothing.maskID != 0)
+                        {
+                            clothing.thirdClothes.mask = 0;
+                            clothing.askWearMask(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.pantID != 0)
+                        {
+                            clothing.thirdClothes.pants = 0;
+                            clothing.askWearPants(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.shirtID != 0)
+                        {
+                            clothing.thirdClothes.shirt = 0;
+                            clothing.askWearShirt(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.vestID != 0)
+                        {
+                            clothing.thirdClothes.vest = 0;
+                            clothing.askWearVest(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.backpackID != 0)
+                        {
+                            clothing.thirdClothes.backpack = 0;
+                            clothing.askWearBackpack(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.glassesID != 0)
+                        {
+                            clothing.thirdClothes.glasses = 0;
+                            clothing.askWearGlasses(0, 0, new byte[0], false);
+                        }
+                    }
+
+                    if ((PlayerTZ[player.CSteamID.ToString()].shirtID == myClothing.shirtID) && (myClothing.main == "shirt"))
+                    {
+                        if (myClothing.maskID != 0)
+                        {
+                            clothing.thirdClothes.mask = 0;
+                            clothing.askWearMask(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.pantID != 0)
+                        {
+                            clothing.thirdClothes.pants = 0;
+                            clothing.askWearPants(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.hatID != 0)
+                        {
+                            clothing.thirdClothes.hat = 0;
+                            clothing.askWearHat(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.vestID != 0)
+                        {
+                            clothing.thirdClothes.vest = 0;
+                            clothing.askWearVest(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.backpackID != 0)
+                        {
+                            clothing.thirdClothes.backpack = 0;
+                            clothing.askWearBackpack(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.glassesID != 0)
+                        {
+                            clothing.thirdClothes.glasses = 0;
+                            clothing.askWearGlasses(0, 0, new byte[0], false);
+                        }
+                    }
+
+                    if ((PlayerTZ[player.CSteamID.ToString()].pantID == myClothing.pantID) && (myClothing.main == "pant"))
+                    {
+                        if (myClothing.maskID != 0)
+                        {
+                            clothing.thirdClothes.mask = 0;
+                            clothing.askWearMask(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.shirtID != 0)
+                        {
+                            clothing.thirdClothes.shirt = 0;
+                            clothing.askWearShirt(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.hatID != 0)
+                        {
+                            clothing.thirdClothes.hat = 0;
+                            clothing.askWearHat(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.vestID != 0)
+                        {
+                            clothing.thirdClothes.vest = 0;
+                            clothing.askWearVest(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.backpackID != 0)
+                        {
+                            clothing.thirdClothes.backpack = 0;
+                            clothing.askWearBackpack(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.glassesID != 0)
+                        {
+                            clothing.thirdClothes.glasses = 0;
+                            clothing.askWearGlasses(0, 0, new byte[0], false);
+                        }
+                    }
+
+                    if ((PlayerTZ[player.CSteamID.ToString()].vestID == myClothing.vestID) && (myClothing.main == "vest"))
+                    {
+                        if (myClothing.maskID != 0)
+                        {
+                            clothing.thirdClothes.mask = 0;
+                            clothing.askWearMask(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.shirtID != 0)
+                        {
+                            clothing.thirdClothes.shirt = 0;
+                            clothing.askWearShirt(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.hatID != 0)
+                        {
+                            clothing.thirdClothes.hat = 0;
+                            clothing.askWearHat(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.pantID != 0)
+                        {
+                            clothing.thirdClothes.pants = 0;
+                            clothing.askWearPants(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.backpackID != 0)
+                        {
+                            clothing.thirdClothes.backpack = 0;
+                            clothing.askWearBackpack(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.glassesID != 0)
+                        {
+                            clothing.thirdClothes.glasses = 0;
+                            clothing.askWearGlasses(0, 0, new byte[0], false);
+                        }
+                    }
+
+                    if ((PlayerTZ[player.CSteamID.ToString()].glassesID == myClothing.glassesID) && (myClothing.main == "glasses"))
+                    {
+                        if (myClothing.maskID != 0)
+                        {
+                            clothing.thirdClothes.mask = 0;
+                            clothing.askWearMask(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.shirtID != 0)
+                        {
+                            clothing.thirdClothes.shirt = 0;
+                            clothing.askWearShirt(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.hatID != 0)
+                        {
+                            clothing.thirdClothes.hat = 0;
+                            clothing.askWearHat(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.pantID != 0)
+                        {
+                            clothing.thirdClothes.pants = 0;
+                            clothing.askWearPants(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.backpackID != 0)
+                        {
+                            clothing.thirdClothes.backpack = 0;
+                            clothing.askWearBackpack(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.vestID != 0)
+                        {
+                            clothing.thirdClothes.vest = 0;
+                            clothing.askWearVest(0, 0, new byte[0], false);
+                        }
+                    }
+
+                    if ((PlayerTZ[player.CSteamID.ToString()].backpackID == myClothing.backpackID) && (myClothing.main == "backpack"))
+                    {
+                        if (myClothing.maskID != 0)
+                        {
+                            clothing.thirdClothes.mask = 0;
+                            clothing.askWearMask(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.shirtID != 0)
+                        {
+                            clothing.thirdClothes.shirt = 0;
+                            clothing.askWearShirt(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.hatID != 0)
+                        {
+                            clothing.thirdClothes.hat = 0;
+                            clothing.askWearHat(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.pantID != 0)
+                        {
+                            clothing.thirdClothes.pants = 0;
+                            clothing.askWearPants(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.glassesID != 0)
+                        {
+                            clothing.thirdClothes.glasses = 0;
+                            clothing.askWearGlasses(0, 0, new byte[0], false);
+                        }
+
+                        if (myClothing.vestID != 0)
+                        {
+                            clothing.thirdClothes.vest = 0;
+                            clothing.askWearVest(0, 0, new byte[0], false);
+                        }
+                    }
+                }
+
+
+                // 穿的是上衣，且是基于上衣的套装
+                if ((wear.ToString() == "Shirt") && (clothing.shirt == myClothing.shirtID) && (myClothing.main == "shirt"))
+                {
+                    if (myClothing.hatID != 0)
+                    {
+                        clothing.askWearHat(myClothing.hatID, clothing.shirtQuality, clothing.shirtState, false);
+                    }
+
+                    if (myClothing.pantID != 0)
+                    {
+                        clothing.askWearPants(myClothing.pantID, clothing.shirtQuality, clothing.shirtState, false);
+                    }
+
+                    if (myClothing.maskID != 0)
+                    {
+                        clothing.askWearMask(myClothing.maskID, clothing.shirtQuality, clothing.shirtState, false);
+                    }
+
+                    if (myClothing.vestID != 0)
+                    {
+                        clothing.askWearVest(myClothing.vestID, clothing.shirtQuality, clothing.shirtState, false);
+                    }
+
+                    if (myClothing.backpackID != 0)
+                    {
+                        clothing.askWearBackpack(myClothing.backpackID, clothing.shirtQuality, clothing.shirtState, false);
+                    }
+
+                    if (myClothing.glassesID != 0)
+                    {
+                        clothing.askWearGlasses(myClothing.glassesID, clothing.shirtQuality, clothing.shirtState, false);
+                    }
+                }
+            }
+
+
+            PlayerTZ[player.CSteamID.ToString()] = new MyClothing(player.Player.clothing.player.clothing);
+            PlayerTZ[player.CSteamID.ToString()].issing = false;
         }
 
         private void OnPlayerConnected(UnturnedPlayer player)
@@ -346,407 +791,5 @@ namespace SLimitAskClothing_RocketMod
             }
         }
 
-        private void OnShirtChanged_Global(PlayerClothing clothing)
-        {
-
-            PluginConfig config = Configuration.Instance;
-            UnturnedPlayer unturnedPlayer = UnturnedPlayer.FromPlayer(clothing.player);
-
-            if (PlayerTZ[unturnedPlayer.CSteamID.ToString()].shirtID == clothing.shirt)
-            {
-                return;
-            }
-
-            if (clothing.shirt == 0)
-            {
-                foreach (MyClothing myClothing in config.套装)
-                {
-                    if ((PlayerTZ[unturnedPlayer.CSteamID.ToString()].shirtID == myClothing.shirtID) && (myClothing.main == "shirt"))
-                    {
-                        if (myClothing.hatID != 0)
-                        {
-                            clothing.thirdClothes.hat = 0;
-                            clothing.askWearHat(0, 0, new byte[0], false);
-                        }
-
-                        if (myClothing.pantID != 0)
-                        {
-                            clothing.thirdClothes.pants = 0;
-                            clothing.askWearPants(0, 0, new byte[0], false);
-                        }
-
-                        if (myClothing.maskID != 0)
-                        {
-                            clothing.thirdClothes.mask = 0;
-                            clothing.askWearMask(0, 0, new byte[0], false);
-                        }
-
-                        if (myClothing.vestID != 0)
-                        {
-                            clothing.thirdClothes.vest = 0;
-                            clothing.askWearVest(0, 0, new byte[0], false);
-                        }
-
-                        if (myClothing.backpackID != 0)
-                        {
-                            clothing.thirdClothes.backpack = 0;
-                            clothing.askWearBackpack(0, 0, new byte[0], false);
-                        }
-
-                        if (myClothing.glassesID != 0)
-                        {
-                            clothing.thirdClothes.glasses = 0;
-                            clothing.askWearGlasses(0, 0, new byte[0], false);
-                        }
-
-                        PlayerTZ[unturnedPlayer.CSteamID.ToString()] = new MyClothing(clothing.player.clothing);
-                        return;
-                    }
-                }
-            }
-
-            foreach (MyClothing myClothing in config.套装)
-            {
-                if ((clothing.shirt == myClothing.shirtID) && (myClothing.main == "shirt"))
-                {
-                    foreach (MyClothing myClothing1 in config.套装)
-                    {
-                        if ((PlayerTZ[unturnedPlayer.CSteamID.ToString()].maskID == myClothing1.maskID) && (myClothing1.main == "mask"))
-                        {
-                            if (myClothing1.hatID != 0)
-                            {
-                                clothing.thirdClothes.hat = 0;
-                                clothing.askWearHat(0, 0, new byte[0], false);
-                            }
-
-                            if (myClothing1.pantID != 0)
-                            {
-                                clothing.thirdClothes.pants = 0;
-                                clothing.askWearPants(0, 0, new byte[0], false);
-                            }
-
-                            if (myClothing1.shirtID != 0)
-                            {
-                                clothing.thirdClothes.shirt = 0;
-                                clothing.askWearShirt(0, 0, new byte[0], false);
-                            }
-
-                            if (myClothing1.vestID != 0)
-                            {
-                                clothing.thirdClothes.vest = 0;
-                                clothing.askWearVest(0, 0, new byte[0], false);
-                            }
-
-                            if (myClothing1.backpackID != 0)
-                            {
-                                clothing.thirdClothes.backpack = 0;
-                                clothing.askWearBackpack(0, 0, new byte[0], false);
-                            }
-
-                            if (myClothing1.glassesID != 0)
-                            {
-                                clothing.thirdClothes.glasses = 0;
-                                clothing.askWearGlasses(0, 0, new byte[0], false);
-                            }
-                            break;
-                        }
-
-                        if ((PlayerTZ[unturnedPlayer.CSteamID.ToString()].hatID == myClothing1.hatID) && (myClothing1.main == "hat"))
-                        {
-                            if (myClothing1.maskID != 0)
-                            {
-                                clothing.thirdClothes.mask = 0;
-                                clothing.askWearMask(0, 0, new byte[0], false);
-                            }
-
-                            if (myClothing1.pantID != 0)
-                            {
-                                clothing.thirdClothes.pants = 0;
-                                clothing.askWearPants(0, 0, new byte[0], false);
-                            }
-
-                            if (myClothing1.shirtID != 0)
-                            {
-                                clothing.thirdClothes.shirt = 0;
-                                clothing.askWearShirt(0, 0, new byte[0], false);
-                            }
-
-                            if (myClothing1.vestID != 0)
-                            {
-                                clothing.thirdClothes.vest = 0;
-                                clothing.askWearVest(0, 0, new byte[0], false);
-                            }
-
-                            if (myClothing1.backpackID != 0)
-                            {
-                                clothing.thirdClothes.backpack = 0;
-                                clothing.askWearBackpack(0, 0, new byte[0], false);
-                            }
-
-                            if (myClothing1.glassesID != 0)
-                            {
-                                clothing.thirdClothes.glasses = 0;
-                                clothing.askWearGlasses(0, 0, new byte[0], false);
-                            }
-                            break;
-                        }
-
-                        if ((PlayerTZ[unturnedPlayer.CSteamID.ToString()].shirtID == myClothing1.shirtID) && (myClothing1.main == "shirt"))
-                        {
-                            if (myClothing1.maskID != 0)
-                            {
-                                clothing.thirdClothes.mask = 0;
-                                clothing.askWearMask(0, 0, new byte[0], false);
-                            }
-
-                            if (myClothing1.pantID != 0)
-                            {
-                                clothing.thirdClothes.pants = 0;
-                                clothing.askWearPants(0, 0, new byte[0], false);
-                            }
-
-                            if (myClothing1.hatID != 0)
-                            {
-                                clothing.thirdClothes.hat = 0;
-                                clothing.askWearHat(0, 0, new byte[0], false);
-                            }
-
-                            if (myClothing1.vestID != 0)
-                            {
-                                clothing.thirdClothes.vest = 0;
-                                clothing.askWearVest(0, 0, new byte[0], false);
-                            }
-
-                            if (myClothing1.backpackID != 0)
-                            {
-                                clothing.thirdClothes.backpack = 0;
-                                clothing.askWearBackpack(0, 0, new byte[0], false);
-                            }
-
-                            if (myClothing1.glassesID != 0)
-                            {
-                                clothing.thirdClothes.glasses = 0;
-                                clothing.askWearGlasses(0, 0, new byte[0], false);
-                            }
-                            break;
-                        }
-
-                        if ((PlayerTZ[unturnedPlayer.CSteamID.ToString()].pantID == myClothing1.pantID) && (myClothing1.main == "pant"))
-                        {
-                            if (myClothing1.maskID != 0)
-                            {
-                                clothing.thirdClothes.mask = 0;
-                                clothing.askWearMask(0, 0, new byte[0], false);
-                            }
-
-                            if (myClothing1.shirtID != 0)
-                            {
-                                clothing.thirdClothes.shirt = 0;
-                                clothing.askWearShirt(0, 0, new byte[0], false);
-                            }
-
-                            if (myClothing1.hatID != 0)
-                            {
-                                clothing.thirdClothes.hat = 0;
-                                clothing.askWearHat(0, 0, new byte[0], false);
-                            }
-
-                            if (myClothing1.vestID != 0)
-                            {
-                                clothing.thirdClothes.vest = 0;
-                                clothing.askWearVest(0, 0, new byte[0], false);
-                            }
-
-                            if (myClothing1.backpackID != 0)
-                            {
-                                clothing.thirdClothes.backpack = 0;
-                                clothing.askWearBackpack(0, 0, new byte[0], false);
-                            }
-
-                            if (myClothing1.glassesID != 0)
-                            {
-                                clothing.thirdClothes.glasses = 0;
-                                clothing.askWearGlasses(0, 0, new byte[0], false);
-                            }
-                            break;
-                        }
-
-                        if ((PlayerTZ[unturnedPlayer.CSteamID.ToString()].vestID == myClothing1.vestID) && (myClothing1.main == "vest"))
-                        {
-                            if (myClothing1.maskID != 0)
-                            {
-                                clothing.thirdClothes.mask = 0;
-                                clothing.askWearMask(0, 0, new byte[0], false);
-                            }
-
-                            if (myClothing1.shirtID != 0)
-                            {
-                                clothing.thirdClothes.shirt = 0;
-                                clothing.askWearShirt(0, 0, new byte[0], false);
-                            }
-
-                            if (myClothing1.hatID != 0)
-                            {
-                                clothing.thirdClothes.hat = 0;
-                                clothing.askWearHat(0, 0, new byte[0], false);
-                            }
-
-                            if (myClothing1.pantID != 0)
-                            {
-                                clothing.thirdClothes.pants = 0;
-                                clothing.askWearPants(0, 0, new byte[0], false);
-                            }
-
-                            if (myClothing1.backpackID != 0)
-                            {
-                                clothing.thirdClothes.backpack = 0;
-                                clothing.askWearBackpack(0, 0, new byte[0], false);
-                            }
-
-                            if (myClothing1.glassesID != 0)
-                            {
-                                clothing.thirdClothes.glasses = 0;
-                                clothing.askWearGlasses(0, 0, new byte[0], false);
-                            }
-                            break;
-                        }
-
-                        if ((PlayerTZ[unturnedPlayer.CSteamID.ToString()].glassesID == myClothing1.glassesID) && (myClothing1.main == "glasses"))
-                        {
-                            if (myClothing1.maskID != 0)
-                            {
-                                clothing.thirdClothes.mask = 0;
-                                clothing.askWearMask(0, 0, new byte[0], false);
-                            }
-
-                            if (myClothing1.shirtID != 0)
-                            {
-                                clothing.thirdClothes.shirt = 0;
-                                clothing.askWearShirt(0, 0, new byte[0], false);
-                            }
-
-                            if (myClothing1.hatID != 0)
-                            {
-                                clothing.thirdClothes.hat = 0;
-                                clothing.askWearHat(0, 0, new byte[0], false);
-                            }
-
-                            if (myClothing1.pantID != 0)
-                            {
-                                clothing.thirdClothes.pants = 0;
-                                clothing.askWearPants(0, 0, new byte[0], false);
-                            }
-
-                            if (myClothing1.backpackID != 0)
-                            {
-                                clothing.thirdClothes.backpack = 0;
-                                clothing.askWearBackpack(0, 0, new byte[0], false);
-                            }
-
-                            if (myClothing1.vestID != 0)
-                            {
-                                clothing.thirdClothes.vest = 0;
-                                clothing.askWearVest(0, 0, new byte[0], false);
-                            }
-                            break;
-                        }
-
-                        if ((PlayerTZ[unturnedPlayer.CSteamID.ToString()].backpackID == myClothing1.backpackID) && (myClothing1.main == "backpack"))
-                        {
-                            if (myClothing1.maskID != 0)
-                            {
-                                clothing.thirdClothes.mask = 0;
-                                clothing.askWearMask(0, 0, new byte[0], false);
-                            }
-
-                            if (myClothing1.shirtID != 0)
-                            {
-                                clothing.thirdClothes.shirt = 0;
-                                clothing.askWearShirt(0, 0, new byte[0], false);
-                            }
-
-                            if (myClothing1.hatID != 0)
-                            {
-                                clothing.thirdClothes.hat = 0;
-                                clothing.askWearHat(0, 0, new byte[0], false);
-                            }
-
-                            if (myClothing1.pantID != 0)
-                            {
-                                clothing.thirdClothes.pants = 0;
-                                clothing.askWearPants(0, 0, new byte[0], false);
-                            }
-
-                            if (myClothing1.glassesID != 0)
-                            {
-                                clothing.thirdClothes.glasses = 0;
-                                clothing.askWearGlasses(0, 0, new byte[0], false);
-                            }
-
-                            if (myClothing1.vestID != 0)
-                            {
-                                clothing.thirdClothes.vest = 0;
-                                clothing.askWearVest(0, 0, new byte[0], false);
-                            }
-                            break;
-                        }
-
-                    }
-
-                    if (myClothing.hatID != 0)
-                    {
-                        clothing.askWearHat(myClothing.hatID, clothing.shirtQuality, clothing.shirtState, false);
-                    }
-
-                    if (myClothing.pantID != 0)
-                    {
-                        clothing.askWearPants(myClothing.pantID, clothing.shirtQuality, clothing.shirtState, false);
-                    }
-
-                    if (myClothing.maskID != 0)
-                    {
-                        clothing.askWearMask(myClothing.maskID, clothing.shirtQuality, clothing.shirtState, false);
-                    }
-
-                    if (myClothing.vestID != 0)
-                    {
-                        clothing.askWearVest(myClothing.vestID, clothing.shirtQuality, clothing.shirtState, false);
-                    }
-
-                    if (myClothing.backpackID != 0)
-                    {
-                        clothing.askWearBackpack(myClothing.backpackID, clothing.shirtQuality, clothing.shirtState, false);
-                    }
-
-                    if (myClothing.glassesID != 0)
-                    {
-                        clothing.askWearGlasses(myClothing.glassesID, clothing.shirtQuality, clothing.shirtState, false);
-                    }
-
-                    PlayerTZ[unturnedPlayer.CSteamID.ToString()] = new MyClothing(clothing.player.clothing);
-                    return;
-                }
-            }
-
-
-            bool beacon = false;
-            foreach (MyClothing myClothing1 in config.套装)
-            {
-                if ((clothing.shirt == myClothing1.shirtID) && (myClothing1.main == "shirt"))
-                {
-                    beacon = true;
-                    break;
-                }
-            }
-            if (!beacon)
-            {
-                clothing.askWearShirt(PlayerTZ[unturnedPlayer.CSteamID.ToString()].shirtID,
-                    PlayerTZ[unturnedPlayer.CSteamID.ToString()].shirtQuality,
-                    PlayerTZ[unturnedPlayer.CSteamID.ToString()].shirtState, false);
-                return;
-            }
-
-            PlayerTZ[unturnedPlayer.CSteamID.ToString()] = new MyClothing(clothing.player.clothing);
-        }
     }
 }
