@@ -227,7 +227,7 @@ namespace SLimitAskClothing_RocketMod
                 clothing.askWearMask(0, 0, new byte[0], false);
             }
 
-            if (myClothing.main == "vesk")
+            if (myClothing.main == "vest")
             {
                 if (myClothing.hatID != 0)
                 {
@@ -361,11 +361,19 @@ namespace SLimitAskClothing_RocketMod
                     clothing.thirdClothes.hat = 0;
                     clothing.askWearHat(0, 0, new byte[0], false);
                 }
+                else if ((myClothing.hatID != 0) && (nextClothing.hatID != 0))
+                {
+                    clothing.thirdClothes.hat = 0;
+                }
 
                 if ((myClothing.pantID != 0) && (nextClothing.pantID == 0))
                 {
                     clothing.thirdClothes.pants = 0;
                     clothing.askWearPants(0, 0, new byte[0], false);
+                }
+                else if ((myClothing.pantID != 0) && (nextClothing.pantID != 0))
+                {
+                    clothing.thirdClothes.pants = 0;
                 }
 
                 if ((myClothing.maskID != 0) && (nextClothing.maskID == 0))
@@ -373,11 +381,19 @@ namespace SLimitAskClothing_RocketMod
                     clothing.thirdClothes.mask = 0;
                     clothing.askWearMask(0, 0, new byte[0], false);
                 }
+                else if ((myClothing.maskID != 0) && (nextClothing.maskID != 0))
+                {
+                    clothing.thirdClothes.mask = 0;
+                }
 
                 if ((myClothing.vestID != 0) && (nextClothing.vestID == 0))
                 {
                     clothing.thirdClothes.vest = 0;
                     clothing.askWearVest(0, 0, new byte[0], false);
+                }
+                else if ((myClothing.vestID != 0) && (nextClothing.vestID != 0))
+                {
+                    clothing.thirdClothes.vest = 0;
                 }
 
                 if ((myClothing.backpackID != 0) && (nextClothing.backpackID == 0))
@@ -385,11 +401,19 @@ namespace SLimitAskClothing_RocketMod
                     clothing.thirdClothes.backpack = 0;
                     clothing.askWearBackpack(0, 0, new byte[0], false);
                 }
+                else if ((myClothing.backpackID != 0) && (nextClothing.backpackID != 0))
+                {
+                    clothing.thirdClothes.backpack = 0;
+                }
 
                 if ((myClothing.glassesID != 0) && (nextClothing.glassesID == 0))
                 {
                     clothing.thirdClothes.glasses = 0;
                     clothing.askWearGlasses(0, 0, new byte[0], false);
+                }
+                else if ((myClothing.glassesID != 0) && (nextClothing.glassesID != 0))
+                {
+                    clothing.thirdClothes.glasses = 0;
                 }
 
                 clothing.askWearShirt(0, 0, new byte[0], false);
@@ -402,11 +426,19 @@ namespace SLimitAskClothing_RocketMod
                     clothing.thirdClothes.shirt = 0;
                     clothing.askWearShirt(0, 0, new byte[0], false);
                 }
+                else if ((myClothing.shirtID != 0) && (nextClothing.shirtID != 0))
+                {
+                    clothing.thirdClothes.shirt = 0;
+                }
 
                 if ((myClothing.pantID != 0) && (nextClothing.pantID == 0))
                 {
                     clothing.thirdClothes.pants = 0;
                     clothing.askWearPants(0, 0, new byte[0], false);
+                }
+                else if ((myClothing.pantID != 0) && (nextClothing.pantID != 0))
+                {
+                    clothing.thirdClothes.pants = 0;
                 }
 
                 if ((myClothing.maskID != 0) && (nextClothing.maskID == 0))
@@ -414,11 +446,19 @@ namespace SLimitAskClothing_RocketMod
                     clothing.thirdClothes.mask = 0;
                     clothing.askWearMask(0, 0, new byte[0], false);
                 }
+                else if ((myClothing.maskID != 0) && (nextClothing.maskID != 0))
+                {
+                    clothing.thirdClothes.mask = 0;
+                }
 
                 if ((myClothing.vestID != 0) && (nextClothing.vestID == 0))
                 {
                     clothing.thirdClothes.vest = 0;
                     clothing.askWearVest(0, 0, new byte[0], false);
+                }
+                else if ((myClothing.vestID != 0) && (nextClothing.vestID != 0))
+                {
+                    clothing.thirdClothes.vest = 0;
                 }
 
                 if ((myClothing.backpackID != 0) && (nextClothing.backpackID == 0))
@@ -426,11 +466,19 @@ namespace SLimitAskClothing_RocketMod
                     clothing.thirdClothes.backpack = 0;
                     clothing.askWearBackpack(0, 0, new byte[0], false);
                 }
+                else if ((myClothing.backpackID != 0) && (nextClothing.backpackID != 0))
+                {
+                    clothing.thirdClothes.backpack = 0;
+                }
 
                 if ((myClothing.glassesID != 0) && (nextClothing.glassesID == 0))
                 {
                     clothing.thirdClothes.glasses = 0;
                     clothing.askWearGlasses(0, 0, new byte[0], false);
+                }
+                else if ((myClothing.glassesID != 0) && (nextClothing.glassesID != 0))
+                {
+                    clothing.thirdClothes.glasses = 0;
                 }
 
                 clothing.askWearHat(0, 0, new byte[0], false);
@@ -443,11 +491,19 @@ namespace SLimitAskClothing_RocketMod
                     clothing.thirdClothes.hat = 0;
                     clothing.askWearHat(0, 0, new byte[0], false);
                 }
+                else if ((myClothing.hatID != 0) && (nextClothing.hatID != 0))
+                {
+                    clothing.thirdClothes.hat = 0;
+                }
 
                 if ((myClothing.shirtID != 0) && (nextClothing.shirtID == 0))
                 {
                     clothing.thirdClothes.shirt = 0;
                     clothing.askWearShirt(0, 0, new byte[0], false);
+                }
+                else if ((myClothing.shirtID != 0) && (nextClothing.shirtID != 0))
+                {
+                    clothing.thirdClothes.shirt = 0;
                 }
 
                 if ((myClothing.maskID != 0) && (nextClothing.maskID == 0))
@@ -455,11 +511,19 @@ namespace SLimitAskClothing_RocketMod
                     clothing.thirdClothes.mask = 0;
                     clothing.askWearMask(0, 0, new byte[0], false);
                 }
+                else if ((myClothing.maskID != 0) && (nextClothing.maskID != 0))
+                {
+                    clothing.thirdClothes.mask = 0;
+                }
 
                 if ((myClothing.vestID != 0) && (nextClothing.vestID == 0))
                 {
                     clothing.thirdClothes.vest = 0;
                     clothing.askWearVest(0, 0, new byte[0], false);
+                }
+                else if ((myClothing.vestID != 0) && (nextClothing.vestID != 0))
+                {
+                    clothing.thirdClothes.vest = 0;
                 }
 
                 if ((myClothing.backpackID != 0) && (nextClothing.backpackID == 0))
@@ -467,11 +531,19 @@ namespace SLimitAskClothing_RocketMod
                     clothing.thirdClothes.backpack = 0;
                     clothing.askWearBackpack(0, 0, new byte[0], false);
                 }
+                else if ((myClothing.backpackID != 0) && (nextClothing.backpackID != 0))
+                {
+                    clothing.thirdClothes.backpack = 0;
+                }
 
                 if ((myClothing.glassesID != 0) && (nextClothing.glassesID == 0))
                 {
                     clothing.thirdClothes.glasses = 0;
                     clothing.askWearGlasses(0, 0, new byte[0], false);
+                }
+                else if ((myClothing.glassesID != 0) && (nextClothing.glassesID != 0))
+                {
+                    clothing.thirdClothes.glasses = 0;
                 }
 
                 clothing.askWearPants(0, 0, new byte[0], false);
@@ -484,11 +556,19 @@ namespace SLimitAskClothing_RocketMod
                     clothing.thirdClothes.hat = 0;
                     clothing.askWearHat(0, 0, new byte[0], false);
                 }
+                else if ((myClothing.hatID != 0) && (nextClothing.hatID != 0))
+                {
+                    clothing.thirdClothes.hat = 0;
+                }
 
                 if ((myClothing.pantID != 0) && (nextClothing.pantID == 0))
                 {
                     clothing.thirdClothes.pants = 0;
                     clothing.askWearPants(0, 0, new byte[0], false);
+                }
+                else if ((myClothing.pantID != 0) && (nextClothing.pantID != 0))
+                {
+                    clothing.thirdClothes.pants = 0;
                 }
 
                 if ((myClothing.shirtID != 0) && (nextClothing.shirtID == 0))
@@ -496,11 +576,19 @@ namespace SLimitAskClothing_RocketMod
                     clothing.thirdClothes.shirt = 0;
                     clothing.askWearShirt(0, 0, new byte[0], false);
                 }
+                else if ((myClothing.shirtID != 0) && (nextClothing.shirtID != 0))
+                {
+                    clothing.thirdClothes.shirt = 0;
+                }
 
                 if ((myClothing.vestID != 0) && (nextClothing.vestID == 0))
                 {
                     clothing.thirdClothes.vest = 0;
                     clothing.askWearVest(0, 0, new byte[0], false);
+                }
+                else if ((myClothing.vestID != 0) && (nextClothing.vestID != 0))
+                {
+                    clothing.thirdClothes.vest = 0;
                 }
 
                 if ((myClothing.backpackID != 0) && (nextClothing.backpackID == 0))
@@ -508,11 +596,19 @@ namespace SLimitAskClothing_RocketMod
                     clothing.thirdClothes.backpack = 0;
                     clothing.askWearBackpack(0, 0, new byte[0], false);
                 }
+                else if ((myClothing.backpackID != 0) && (nextClothing.backpackID != 0))
+                {
+                    clothing.thirdClothes.backpack = 0;
+                }
 
                 if ((myClothing.glassesID != 0) && (nextClothing.glassesID == 0))
                 {
                     clothing.thirdClothes.glasses = 0;
                     clothing.askWearGlasses(0, 0, new byte[0], false);
+                }
+                else if ((myClothing.glassesID != 0) && (nextClothing.glassesID != 0))
+                {
+                    clothing.thirdClothes.glasses = 0;
                 }
 
                 clothing.askWearMask(0, 0, new byte[0], false);
@@ -523,7 +619,10 @@ namespace SLimitAskClothing_RocketMod
                 if ((myClothing.hatID != 0) && (nextClothing.hatID == 0))
                 {
                     clothing.thirdClothes.hat = 0;
-                    clothing.askWearHat(0, 0, new byte[0], false);
+                }
+                else if ((myClothing.hatID != 0) && (nextClothing.hatID != 0))
+                {
+                    clothing.thirdClothes.hat = 0;
                 }
 
                 if ((myClothing.pantID != 0) && (nextClothing.pantID == 0))
@@ -531,11 +630,19 @@ namespace SLimitAskClothing_RocketMod
                     clothing.thirdClothes.pants = 0;
                     clothing.askWearPants(0, 0, new byte[0], false);
                 }
+                else if ((myClothing.pantID != 0) && (nextClothing.pantID != 0))
+                {
+                    clothing.thirdClothes.pants = 0;
+                }
 
                 if ((myClothing.maskID != 0) && (nextClothing.maskID == 0))
                 {
                     clothing.thirdClothes.mask = 0;
                     clothing.askWearMask(0, 0, new byte[0], false);
+                }
+                else if ((myClothing.maskID != 0) && (nextClothing.maskID != 0))
+                {
+                    clothing.thirdClothes.mask = 0;
                 }
 
                 if ((myClothing.shirtID != 0) && (nextClothing.shirtID == 0))
@@ -543,17 +650,29 @@ namespace SLimitAskClothing_RocketMod
                     clothing.thirdClothes.shirt = 0;
                     clothing.askWearShirt(0, 0, new byte[0], false);
                 }
+                else if ((myClothing.shirtID != 0) && (nextClothing.shirtID != 0))
+                {
+                    clothing.thirdClothes.shirt = 0;
+                }
 
                 if ((myClothing.backpackID != 0) && (nextClothing.backpackID == 0))
                 {
                     clothing.thirdClothes.backpack = 0;
                     clothing.askWearBackpack(0, 0, new byte[0], false);
                 }
+                else if ((myClothing.backpackID != 0) && (nextClothing.backpackID != 0))
+                {
+                    clothing.thirdClothes.backpack = 0;
+                }
 
                 if ((myClothing.glassesID != 0) && (nextClothing.glassesID == 0))
                 {
                     clothing.thirdClothes.glasses = 0;
                     clothing.askWearGlasses(0, 0, new byte[0], false);
+                }
+                else if ((myClothing.glassesID != 0) && (nextClothing.glassesID != 0))
+                {
+                    clothing.thirdClothes.glasses = 0;
                 }
 
                 clothing.askWearVest(0, 0, new byte[0], false);
@@ -566,11 +685,19 @@ namespace SLimitAskClothing_RocketMod
                     clothing.thirdClothes.hat = 0;
                     clothing.askWearHat(0, 0, new byte[0], false);
                 }
+                else if ((myClothing.hatID != 0) && (nextClothing.hatID != 0))
+                {
+                    clothing.thirdClothes.hat = 0;
+                }
 
                 if ((myClothing.pantID != 0) && (nextClothing.pantID == 0))
                 {
                     clothing.thirdClothes.pants = 0;
                     clothing.askWearPants(0, 0, new byte[0], false);
+                }
+                else if ((myClothing.pantID != 0) && (nextClothing.pantID != 0))
+                {
+                    clothing.thirdClothes.pants = 0;
                 }
 
                 if ((myClothing.maskID != 0) && (nextClothing.maskID == 0))
@@ -578,11 +705,19 @@ namespace SLimitAskClothing_RocketMod
                     clothing.thirdClothes.mask = 0;
                     clothing.askWearMask(0, 0, new byte[0], false);
                 }
+                else if ((myClothing.maskID != 0) && (nextClothing.maskID != 0))
+                {
+                    clothing.thirdClothes.mask = 0;
+                }
 
                 if ((myClothing.vestID != 0) && (nextClothing.vestID == 0))
                 {
                     clothing.thirdClothes.vest = 0;
                     clothing.askWearVest(0, 0, new byte[0], false);
+                }
+                else if ((myClothing.vestID != 0) && (nextClothing.vestID != 0))
+                {
+                    clothing.thirdClothes.vest = 0;
                 }
 
                 if ((myClothing.shirtID != 0) && (nextClothing.shirtID == 0))
@@ -590,11 +725,19 @@ namespace SLimitAskClothing_RocketMod
                     clothing.thirdClothes.shirt = 0;
                     clothing.askWearShirt(0, 0, new byte[0], false);
                 }
+                else if ((myClothing.shirtID != 0) && (nextClothing.shirtID != 0))
+                {
+                    clothing.thirdClothes.shirt = 0;
+                }
 
                 if ((myClothing.glassesID != 0) && (nextClothing.glassesID == 0))
                 {
                     clothing.thirdClothes.glasses = 0;
                     clothing.askWearGlasses(0, 0, new byte[0], false);
+                }
+                else if ((myClothing.glassesID != 0) && (nextClothing.glassesID != 0))
+                {
+                    clothing.thirdClothes.glasses = 0;
                 }
 
                 clothing.askWearBackpack(0, 0, new byte[0], false);
@@ -607,11 +750,19 @@ namespace SLimitAskClothing_RocketMod
                     clothing.thirdClothes.hat = 0;
                     clothing.askWearHat(0, 0, new byte[0], false);
                 }
+                else if ((myClothing.hatID != 0) && (nextClothing.hatID != 0))
+                {
+                    clothing.thirdClothes.hat = 0;
+                }
 
                 if ((myClothing.pantID != 0) && (nextClothing.pantID == 0))
                 {
                     clothing.thirdClothes.pants = 0;
                     clothing.askWearPants(0, 0, new byte[0], false);
+                }
+                else if ((myClothing.pantID != 0) && (nextClothing.pantID != 0))
+                {
+                    clothing.thirdClothes.pants = 0;
                 }
 
                 if ((myClothing.maskID != 0) && (nextClothing.maskID == 0))
@@ -619,11 +770,19 @@ namespace SLimitAskClothing_RocketMod
                     clothing.thirdClothes.mask = 0;
                     clothing.askWearMask(0, 0, new byte[0], false);
                 }
+                else if ((myClothing.maskID != 0) && (nextClothing.maskID != 0))
+                {
+                    clothing.thirdClothes.mask = 0;
+                }
 
                 if ((myClothing.vestID != 0) && (nextClothing.vestID == 0))
                 {
                     clothing.thirdClothes.vest = 0;
                     clothing.askWearVest(0, 0, new byte[0], false);
+                }
+                else if ((myClothing.vestID != 0) && (nextClothing.vestID != 0))
+                {
+                    clothing.thirdClothes.vest = 0;
                 }
 
                 if ((myClothing.backpackID != 0) && (nextClothing.backpackID == 0))
@@ -631,15 +790,38 @@ namespace SLimitAskClothing_RocketMod
                     clothing.thirdClothes.backpack = 0;
                     clothing.askWearBackpack(0, 0, new byte[0], false);
                 }
+                else if ((myClothing.backpackID != 0) && (nextClothing.backpackID != 0))
+                {
+                    clothing.thirdClothes.backpack = 0;
+                }
 
                 if ((myClothing.shirtID != 0) && (nextClothing.shirtID == 0))
                 {
                     clothing.thirdClothes.shirt = 0;
                     clothing.askWearShirt(0, 0, new byte[0], false);
                 }
+                else if ((myClothing.shirtID != 0) && (nextClothing.shirtID != 0))
+                {
+                    clothing.thirdClothes.shirt = 0;
+                }
 
                 clothing.askWearGlasses(0, 0, new byte[0], false);
             }
+        }
+
+        public static void ClrClothing2(PlayerClothing clothing)
+        {
+            /*
+             * 
+             * myClothing must is PluginConfig instance
+             */
+            clothing.askWearHat(0, 0, new byte[0], false);
+            clothing.askWearPants(0, 0, new byte[0], false);
+            clothing.askWearMask(0, 0, new byte[0], false);
+            clothing.askWearVest(0, 0, new byte[0], false);
+            clothing.askWearBackpack(0, 0, new byte[0], false);
+            clothing.askWearGlasses(0, 0, new byte[0], false);
+            clothing.askWearShirt(0, 0, new byte[0], false);
         }
 
         private void OnPlayerConnected(UnturnedPlayer player)

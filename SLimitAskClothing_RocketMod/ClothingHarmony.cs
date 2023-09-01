@@ -52,6 +52,7 @@ namespace SLimitAskClothing_RocketMod
                         return !cancel;
                     }
                 }
+                PluginMain.PlayerTZ[player.CSteamID.ToString()].issing = false;
                 return !cancel;
             }
 
@@ -62,10 +63,10 @@ namespace SLimitAskClothing_RocketMod
             foreach (MyClothing myClothing in config.套装)
             {
                 // 新穿的backpack不属于套装核心，且穿之前的衣服是套装 则禁止穿
-                if ((myClothing1.askCore("backpack") == "") && (new MyClothing(clothing).main != ""))
+                if ((myClothing1.askCore("backpack") == string.Empty) && (new MyClothing(clothing).main != ""))
                 {
                     cancel = true;
-                    player.Inventory.forceAddItem(new Item(asset, EItemOrigin.NATURE), true);
+                    player.Inventory.forceAddItemAuto(new Item(asset, EItemOrigin.NATURE), true, true, false);
 
                     PluginMain.PlayerTZ[player.CSteamID.ToString()].issing = false;
                     return !cancel;
@@ -87,6 +88,9 @@ namespace SLimitAskClothing_RocketMod
                             }
                         }
                     }
+
+                    // 脱掉全部衣服
+                    PluginMain.ClrClothing2(clothing);
 
                     if (myClothing.hatID != 0)
                     {
@@ -160,6 +164,7 @@ namespace SLimitAskClothing_RocketMod
                         return !cancel;
                     }
                 }
+                PluginMain.PlayerTZ[player.CSteamID.ToString()].issing = false;
                 return !cancel;
             }
 
@@ -170,10 +175,10 @@ namespace SLimitAskClothing_RocketMod
             foreach (MyClothing myClothing in config.套装)
             {
                 // 新穿的glasses不属于套装核心，且穿之前的衣服是套装 则禁止穿
-                if ((myClothing1.askCore("glasses") == "") && (new MyClothing(clothing).main != ""))
+                if ((myClothing1.askCore("glasses") == string.Empty) && (new MyClothing(clothing).main != ""))
                 {
                     cancel = true;
-                    player.Inventory.forceAddItem(new Item(asset, EItemOrigin.NATURE), true);
+                    player.Inventory.forceAddItemAuto(new Item(asset, EItemOrigin.NATURE), true, true, false);
 
                     PluginMain.PlayerTZ[player.CSteamID.ToString()].issing = false;
                     return !cancel;
@@ -195,6 +200,9 @@ namespace SLimitAskClothing_RocketMod
                             }
                         }
                     }
+
+                    // 脱掉全部衣服
+                    PluginMain.ClrClothing2(clothing);
 
                     if (myClothing.hatID != 0)
                     {
@@ -268,6 +276,7 @@ namespace SLimitAskClothing_RocketMod
                         return !cancel;
                     }
                 }
+                PluginMain.PlayerTZ[player.CSteamID.ToString()].issing = false;
                 return !cancel;
             }
 
@@ -278,10 +287,10 @@ namespace SLimitAskClothing_RocketMod
             foreach (MyClothing myClothing in config.套装)
             {
                 // 新穿的hat不属于套装核心，且穿之前的衣服是套装 则禁止穿
-                if ((myClothing1.askCore("hat") == "") && (new MyClothing(clothing).main != ""))
+                if ((myClothing1.askCore("hat") == string.Empty) && (new MyClothing(clothing).main != ""))
                 {
                     cancel = true;
-                    player.Inventory.forceAddItem(new Item(asset, EItemOrigin.NATURE), true);
+                    player.Inventory.forceAddItemAuto(new Item(asset, EItemOrigin.NATURE), true, true, false);
 
                     PluginMain.PlayerTZ[player.CSteamID.ToString()].issing = false;
                     return !cancel;
@@ -303,6 +312,9 @@ namespace SLimitAskClothing_RocketMod
                             }
                         }
                     }
+
+                    // 脱掉全部衣服
+                    PluginMain.ClrClothing2(clothing);
 
                     if (myClothing.shirtID != 0)
                     {
@@ -376,6 +388,7 @@ namespace SLimitAskClothing_RocketMod
                         return !cancel;
                     }
                 }
+                PluginMain.PlayerTZ[player.CSteamID.ToString()].issing = false;
                 return !cancel;
             }
 
@@ -386,10 +399,10 @@ namespace SLimitAskClothing_RocketMod
             foreach (MyClothing myClothing in config.套装)
             {
                 // 新穿的mask不属于套装核心，且穿之前的衣服是套装 则禁止穿
-                if ((myClothing1.askCore("mask") == "") && (new MyClothing(clothing).main != ""))
+                if ((myClothing1.askCore("mask") == string.Empty) && (new MyClothing(clothing).main != ""))
                 {
                     cancel = true;
-                    player.Inventory.forceAddItem(new Item(asset, EItemOrigin.NATURE), true);
+                    player.Inventory.forceAddItemAuto(new Item(asset, EItemOrigin.NATURE), true, true, false);
 
                     PluginMain.PlayerTZ[player.CSteamID.ToString()].issing = false;
                     return !cancel;
@@ -411,6 +424,9 @@ namespace SLimitAskClothing_RocketMod
                             }
                         }
                     }
+
+                    // 脱掉全部衣服
+                    PluginMain.ClrClothing2(clothing);
 
                     if (myClothing.hatID != 0)
                     {
@@ -484,6 +500,7 @@ namespace SLimitAskClothing_RocketMod
                         return !cancel;
                     }
                 }
+                PluginMain.PlayerTZ[player.CSteamID.ToString()].issing = false;
                 return !cancel;
             }
 
@@ -494,10 +511,10 @@ namespace SLimitAskClothing_RocketMod
             foreach (MyClothing myClothing in config.套装)
             {
                 // 新穿的pants不属于套装核心，且穿之前的衣服是套装 则禁止穿
-                if ((myClothing1.askCore("pant") == "") && (new MyClothing(clothing).main != ""))
+                if ((myClothing1.askCore("pant") == string.Empty) && (new MyClothing(clothing).main != ""))
                 {
                     cancel = true;
-                    player.Inventory.forceAddItem(new Item(asset, EItemOrigin.NATURE), true);
+                    player.Inventory.forceAddItemAuto(new Item(asset, EItemOrigin.NATURE), true, true, false);
 
                     PluginMain.PlayerTZ[player.CSteamID.ToString()].issing = false;
                     return !cancel;
@@ -519,6 +536,9 @@ namespace SLimitAskClothing_RocketMod
                             }
                         }
                     }
+
+                    // 脱掉全部衣服
+                    PluginMain.ClrClothing2(clothing);
 
                     if (myClothing.hatID != 0)
                     {
@@ -592,6 +612,7 @@ namespace SLimitAskClothing_RocketMod
                         return !cancel;
                     }
                 }
+                PluginMain.PlayerTZ[player.CSteamID.ToString()].issing = false;
                 return !cancel;
             }
 
@@ -602,10 +623,10 @@ namespace SLimitAskClothing_RocketMod
             foreach (MyClothing myClothing in config.套装)
             {
                 // 新穿的上衣不属于套装核心，且穿之前的衣服是套装 则禁止穿
-                if ((myClothing1.askCore("shirt") == "") && (new MyClothing(clothing).main != ""))
+                if ((myClothing1.askCore("shirt") == string.Empty) && (new MyClothing(clothing).main != ""))
                 {
                     cancel = true;
-                    player.Inventory.forceAddItem(new Item(asset, EItemOrigin.NATURE), true);
+                    player.Inventory.forceAddItemAuto(new Item(asset, EItemOrigin.NATURE), true, true, false);
 
                     PluginMain.PlayerTZ[player.CSteamID.ToString()].issing = false;
                     return !cancel;
@@ -627,6 +648,9 @@ namespace SLimitAskClothing_RocketMod
                             }
                         }
                     }
+
+                    // 脱掉全部衣服
+                    PluginMain.ClrClothing2(clothing);
 
                     if (myClothing.hatID != 0)
                     {
@@ -700,6 +724,7 @@ namespace SLimitAskClothing_RocketMod
                         return !cancel;
                     }
                 }
+                PluginMain.PlayerTZ[player.CSteamID.ToString()].issing = false;
                 return !cancel;
             }
 
@@ -710,10 +735,10 @@ namespace SLimitAskClothing_RocketMod
             foreach (MyClothing myClothing in config.套装)
             {
                 // 新穿的vest不属于套装核心，且穿之前的衣服是套装 则禁止穿
-                if ((myClothing1.askCore("vest") == "") && (new MyClothing(clothing).main != ""))
+                if ((myClothing1.askCore("vest") == string.Empty) && (new MyClothing(clothing).main != ""))
                 {
                     cancel = true;
-                    player.Inventory.forceAddItem(new Item(asset, EItemOrigin.NATURE), true);
+                    player.Inventory.forceAddItemAuto(new Item(asset, EItemOrigin.NATURE), true, true, false);
 
                     PluginMain.PlayerTZ[player.CSteamID.ToString()].issing = false;
                     return !cancel;
@@ -735,6 +760,9 @@ namespace SLimitAskClothing_RocketMod
                             }
                         }
                     }
+
+                    // 脱掉全部衣服
+                    PluginMain.ClrClothing2(clothing);
 
                     if (myClothing.hatID != 0)
                     {
