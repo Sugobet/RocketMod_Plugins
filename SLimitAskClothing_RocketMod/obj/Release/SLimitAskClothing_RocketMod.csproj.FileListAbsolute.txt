@@ -86,3 +86,5 @@ C:\Users\sugob\Desktop\RocketMod_Plugins\SLimitAskClothing_RocketMod\obj\Release
 C:\Users\sugob\Desktop\RocketMod_Plugins\SLimitAskClothing_RocketMod\obj\Release\SLimitAskClothing_RocketMod.csproj.CopyComplete
 C:\Users\sugob\Desktop\RocketMod_Plugins\SLimitAskClothing_RocketMod\obj\Release\SLimitAskClothing_RocketMod.dll
 C:\Users\sugob\Desktop\RocketMod_Plugins\SLimitAskClothing_RocketMod\obj\Release\SLimitAskClothing_RocketMod.pdb
+C:\Users\sugob\Desktop\RocketMod_Plugins\SLimitAskClothing_RocketMod\bin\Release\0Harmony.dll
+C:\Users\sugob\Desktop\RocketMod_Plugins\SLimitAskClothing_RocketMod\bin\Release\0Harmony.xml

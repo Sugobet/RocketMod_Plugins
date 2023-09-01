@@ -32,7 +32,7 @@ namespace SLimitAskClothing_RocketMod
             套装.Add(new MyClothing
             {
                 name = "测试套装2",
-                main = "shirt",
+                main = "pant",
                 hatID = 0,
                 shirtID = 1171,
                 pantID = 1172,
@@ -109,6 +109,11 @@ namespace SLimitAskClothing_RocketMod
             glassesState = clothing.glassesState;
             backpackState = clothing.backpackState;
 
+            askCore();
+        }
+
+        public void askCore()
+        {
             PluginConfig config = PluginMain.Config;
             foreach (MyClothing myClothing in config.套装)
             {
@@ -154,6 +159,71 @@ namespace SLimitAskClothing_RocketMod
                     break;
                 }
             }
+        }
+
+        public string askCore(string type)
+        {
+            PluginConfig config = PluginMain.Config;
+            foreach (MyClothing myClothing in config.套装)
+            {
+                if (type == "mask")
+                {
+                    if ((maskID == myClothing.maskID) && (myClothing.main == "mask"))
+                    {
+                        return myClothing.main;
+                    }
+                }
+
+                if (type == "hat")
+                {
+                    if ((hatID == myClothing.hatID) && (myClothing.main == "hat"))
+                    {
+                        return myClothing.main;
+                    }
+                }
+
+                if (type == "shirt")
+                {
+                    if ((shirtID == myClothing.shirtID) && (myClothing.main == "shirt"))
+                    {
+                        return myClothing.main;
+                    }
+                }
+
+                if (type == "pant")
+                {
+                    if ((pantID == myClothing.pantID) && (myClothing.main == "pant"))
+                    {
+                        return myClothing.main;
+                    }
+                }
+
+                if (type == "vest")
+                {
+                    if ((vestID == myClothing.vestID) && (myClothing.main == "vest"))
+                    {
+                        return myClothing.main;
+                    }
+                }
+
+                if (type == "glasses")
+                {
+                    if ((glassesID == myClothing.glassesID) && (myClothing.main == "glasses"))
+                    {
+                        return myClothing.main;
+                    }
+                }
+
+                if (type == "backpack")
+                {
+                    if ((backpackID == myClothing.backpackID) && (myClothing.main == "backpack"))
+                    {
+                        return myClothing.main;
+                    }
+                }
+            }
+
+            return "";
         }
     }
 }
