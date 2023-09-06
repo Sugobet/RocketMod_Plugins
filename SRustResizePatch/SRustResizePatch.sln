@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SRustResizePatch", "SRustResizePatch.csproj", "{1A96B96A-6A77-4932-AD0B-2CFA87D2918F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1A96B96A-6A77-4932-AD0B-2CFA87D2918F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A96B96A-6A77-4932-AD0B-2CFA87D2918F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A96B96A-6A77-4932-AD0B-2CFA87D2918F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A96B96A-6A77-4932-AD0B-2CFA87D2918F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {78B8178A-D4D6-4528-B50B-43FCBE48837C}
+	EndGlobalSection
+EndGlobal
