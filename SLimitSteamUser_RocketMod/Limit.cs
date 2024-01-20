@@ -23,7 +23,7 @@ namespace SLimitSteamUser_RocketMod
             string jsonString = "";
             try
             {
-                jsonString = wc.DownloadString($"http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key={key}&steamids={steamID}");
+                jsonString = wc.DownloadStringTaskAsync($"http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key={key}&steamids={steamID}").Result;
             } catch
             {
                 Logger.Log("Steam API请求失败，请检查Key是否失效或配置错误！", ConsoleColor.Red);
@@ -51,7 +51,7 @@ namespace SLimitSteamUser_RocketMod
             string jsonString = "";
             try
             {
-                jsonString = wc.DownloadString($"https://api.steampowered.com/IPlayerService/GetSteamLevel/v1/?key={key}&steamid={steamID}");
+                jsonString = wc.DownloadStringTaskAsync($"https://api.steampowered.com/IPlayerService/GetSteamLevel/v1/?key={key}&steamid={steamID}").Result;
             }
             catch
             {
@@ -79,7 +79,7 @@ namespace SLimitSteamUser_RocketMod
             string jsonString = "";
             try
             {
-                jsonString = wc.DownloadString($"https://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v1/?key={key}&steamid={steamID}");
+                jsonString = wc.DownloadStringTaskAsync($"https://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v1/?key={key}&steamid={steamID}").Result;
             }
             catch
             {
@@ -128,7 +128,7 @@ namespace SLimitSteamUser_RocketMod
             string jsonString = "";
             try
             {
-                jsonString = wc.DownloadString($"https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?key={key}&steamids={steamID}");
+                jsonString = wc.DownloadStringTaskAsync($"https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?key={key}&steamids={steamID}").Result;
             }
             catch
             {

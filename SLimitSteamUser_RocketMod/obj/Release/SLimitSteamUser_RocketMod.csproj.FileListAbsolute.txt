@@ -73,7 +73,6 @@ C:\Users\sugob\Desktop\RocketMod_Plugins\SLimitSteamUser_RocketMod\bin\Release\U
 C:\Users\sugob\Desktop\RocketMod_Plugins\SLimitSteamUser_RocketMod\bin\Release\UnityEngine.VirtualTexturingModule.dll
 C:\Users\sugob\Desktop\RocketMod_Plugins\SLimitSteamUser_RocketMod\bin\Release\UnityEngine.GameCenterModule.dll
 C:\Users\sugob\Desktop\RocketMod_Plugins\SLimitSteamUser_RocketMod\bin\Release\UnityEngine.StreamingModule.dll
-C:\Users\sugob\Desktop\RocketMod_Plugins\SLimitSteamUser_RocketMod\bin\Release\UnityEngine.TextCoreModule.dll
 C:\Users\sugob\Desktop\RocketMod_Plugins\SLimitSteamUser_RocketMod\bin\Release\UnityEngine.SpriteShapeModule.dll
 C:\Users\sugob\Desktop\RocketMod_Plugins\SLimitSteamUser_RocketMod\bin\Release\UnityEngine.UIElementsNativeModule.dll
 C:\Users\sugob\Desktop\RocketMod_Plugins\SLimitSteamUser_RocketMod\bin\Release\UnityEngine.XRModule.dll
@@ -89,3 +88,9 @@ C:\Users\sugob\Desktop\RocketMod_Plugins\SLimitSteamUser_RocketMod\obj\Release\S
 C:\Users\sugob\Desktop\RocketMod_Plugins\SLimitSteamUser_RocketMod\obj\Release\SLimitSteamUser_RocketMod.csproj.CopyComplete
 C:\Users\sugob\Desktop\RocketMod_Plugins\SLimitSteamUser_RocketMod\obj\Release\SLimitSteamUser_RocketMod.dll
 C:\Users\sugob\Desktop\RocketMod_Plugins\SLimitSteamUser_RocketMod\obj\Release\SLimitSteamUser_RocketMod.pdb
+C:\Users\sugob\Desktop\RocketMod_Plugins\SLimitSteamUser_RocketMod\bin\Release\UnityEngine.UnityAnalyticsCommonModule.dll
+C:\Users\sugob\Desktop\RocketMod_Plugins\SLimitSteamUser_RocketMod\bin\Release\UnityEngine.NVIDIAModule.dll
+C:\Users\sugob\Desktop\RocketMod_Plugins\SLimitSteamUser_RocketMod\bin\Release\UnityEngine.TextCoreFontEngineModule.dll
+C:\Users\sugob\Desktop\RocketMod_Plugins\SLimitSteamUser_RocketMod\bin\Release\UnityEngine.TextCoreTextEngineModule.dll
+C:\Users\sugob\Desktop\RocketMod_Plugins\SLimitSteamUser_RocketMod\bin\Release\Assembly-CSharp.xml
+C:\Users\sugob\Desktop\RocketMod_Plugins\SLimitSteamUser_RocketMod\bin\Release\SDG.NetPak.Runtime.xml
