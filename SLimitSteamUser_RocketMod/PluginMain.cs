@@ -21,6 +21,7 @@ namespace SLimitSteamUser_RocketMod
     {
         public static PluginMain Instance { get; private set; }
         public static PluginConfig Config { get; private set; }
+        public static WebClient wc;
 
         protected override void Load()
         {
@@ -28,6 +29,7 @@ namespace SLimitSteamUser_RocketMod
             Config = Configuration.Instance;
 
             U.Events.OnBeforePlayerConnected += OnBeforePlayerConnected;
+            wc = new WebClient();
 
             Logger.Log("SLimitSteamUser v1.0.0 loaded    Author: Sugobet");
         }
@@ -35,6 +37,7 @@ namespace SLimitSteamUser_RocketMod
         protected override void Unload()
         {
             U.Events.OnBeforePlayerConnected -= OnBeforePlayerConnected;
+            wc.Dispose();
         }
 
         private void OnBeforePlayerConnected(UnturnedPlayer player)

@@ -19,11 +19,11 @@ namespace SLimitSteamUser_RocketMod
         {
             if (!PluginMain.Config.启用存在VAC记录限制进服) { return false; }
 
-            using WebClient wc = new WebClient();
+            WebClient wc = PluginMain.wc;
             string jsonString = "";
             try
             {
-                jsonString = wc.DownloadStringTaskAsync($"http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key={key}&steamids={steamID}").Result;
+                jsonString = wc.DownloadString($"http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key={key}&steamids={steamID}");
             } catch
             {
                 Logger.Log("Steam API请求失败，请检查Key是否失效或配置错误！", ConsoleColor.Red);
@@ -47,11 +47,11 @@ namespace SLimitSteamUser_RocketMod
         {
             if (PluginMain.Config.Steam等级限制进服 == -1) { return false; }
 
-            using WebClient wc = new WebClient();
+            WebClient wc = PluginMain.wc;
             string jsonString = "";
             try
             {
-                jsonString = wc.DownloadStringTaskAsync($"https://api.steampowered.com/IPlayerService/GetSteamLevel/v1/?key={key}&steamid={steamID}").Result;
+                jsonString = wc.DownloadString($"https://api.steampowered.com/IPlayerService/GetSteamLevel/v1/?key={key}&steamid={steamID}");
             }
             catch
             {
@@ -75,11 +75,11 @@ namespace SLimitSteamUser_RocketMod
         {
             if (PluginMain.Config.Unturned游戏时长限制 == -1) { return false; }
 
-            using WebClient wc = new WebClient();
+            WebClient wc = PluginMain.wc;
             string jsonString = "";
             try
             {
-                jsonString = wc.DownloadStringTaskAsync($"https://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v1/?key={key}&steamid={steamID}").Result;
+                jsonString = wc.DownloadString($"https://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v1/?key={key}&steamid={steamID}");
             }
             catch
             {
@@ -124,11 +124,11 @@ namespace SLimitSteamUser_RocketMod
         {
             if (!PluginMain.Config.是否禁止私密账号进服) { return false; }
 
-            using WebClient wc = new WebClient();
+            WebClient wc = PluginMain.wc;
             string jsonString = "";
             try
             {
-                jsonString = wc.DownloadStringTaskAsync($"https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?key={key}&steamids={steamID}").Result;
+                jsonString = wc.DownloadString($"https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?key={key}&steamids={steamID}");
             }
             catch
             {
